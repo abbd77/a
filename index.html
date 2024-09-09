@@ -85,13 +85,22 @@
             100% { transform: translateY(0px); }
         }
 
-        h1 {
-            color: #333;
-            font-size: 2em;
-            position: relative;
-            z-index: 1;
-            opacity: 0;
+        /* الصورة الدائرية */
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%; /* جعل الصورة دائرية */
+            border: 5px solid white; /* إضافة إطار أبيض */
+            object-fit: cover; /* لضبط الصورة داخل الإطار */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف للصورة */
+            margin-bottom: 30px;
             animation: fadeIn 2s ease-in forwards; /* تأثير ظهور تدريجي */
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .social-links {
@@ -103,11 +112,6 @@
             z-index: 1;
             opacity: 0;
             animation: fadeIn 2.5s ease-in forwards; /* تأثير ظهور تدريجي */
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .social-links a {
@@ -173,7 +177,8 @@
     <div class="shape"></div>
     <div class="shape"></div>
 
-    <h1>تابعني على مواقع التواصل الاجتماعي</h1>
+    <!-- صورة شخصية داخل إطار دائري -->
+    <img src="https://drive.google.com/uc?id=1-On0GTbx9mgMfaKMppJpbJjV8nhgbhaK" alt="صورة شخصية" class="profile-pic">
 
     <div class="social-links">
         <a href="https://www.facebook.com" class="facebook"><i class="fab fa-facebook"></i> فيسبوك</a>
