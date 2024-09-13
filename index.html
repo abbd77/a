@@ -1,213 +1,74 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روابط مواقع التواصل الاجتماعي</title>
-    <!-- Font Awesome لأيقونات مواقع التواصل -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Domino Camera</title>
     <style>
-        html {
-            scroll-behavior: smooth; /* تأثير تمرير سلس */
-        }
-
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding: 50px;
-            margin: 0;
-            height: 100vh; /* تغطية كامل الشاشة */
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* تحريك الخلفية */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fcb69f, #ffdde1);
-            background-size: 800% 800%;
-            z-index: -1;
-            animation: gradientAnimation 10s ease infinite;
-        }
-
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* أشكال متحركة عشوائية */
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            animation: moveShapes 15s linear infinite;
-            z-index: -1;
-        }
-
-        .shape:nth-child(1) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            left: 10%;
-        }
-
-        .shape:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            top: 60%;
-            left: 30%;
-        }
-
-        .shape:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            top: 40%;
-            left: 70%;
-        }
-
-        .shape:nth-child(4) {
-            width: 120px;
-            height: 120px;
-            top: 70%;
-            left: 50%;
-        }
-
-        @keyframes moveShapes {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-50px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* الصورة الدائرية */
-        .profile-pic {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%; /* جعل الصورة دائرية */
-            border: 5px solid white; /* إضافة إطار أبيض */
-            object-fit: cover; /* لضبط الصورة داخل الإطار */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف للصورة */
-            margin-bottom: 30px;
-            animation: fadeIn 2s ease-in forwards; /* تأثير ظهور تدريجي */
-            opacity: 0;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .social-links {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
-            position: relative;
-            z-index: 1;
-            opacity: 0;
-            animation: fadeIn 2.5s ease-in forwards; /* تأثير ظهور تدريجي */
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
-
-        .social-links a {
-            text-decoration: none;
-            color: white;
-            padding: 20px 35px;
-            border-radius: 10px;
-            font-size: 1.5em;
-            width: 250px;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            background-size: 200% auto; /* تأثير تغيير اللون */
+        video {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+            border: 2px solid black;
         }
-
-        .social-links a:hover {
-            background-position: right center; /* حركة تدريجية للون الخلفية */
-            transform: scale(1.1);
-        }
-
-        .facebook {
-            background-color: #3b5998;
-        }
-
-        .twitter {
-            background-color: #1da1f2;
-        }
-
-        .instagram {
-            background-color: #e4405f;
-        }
-
-        .linkedin {
-            background-color: #0077b5;
-        }
-
-        /* زر العودة إلى الأعلى */
-        #topBtn {
+        canvas {
             display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 30px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: #555;
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 18px;
         }
-
-        #topBtn:hover {
-            background-color: #333;
+        #captureButton {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-
-    <!-- أشكال تتحرك في الخلفية -->
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-
-    <!-- صورة شخصية داخل إطار دائري -->
-    <img src="https://drive.google.com/file/d/1-BAL1QcnoF1tYXZ-Nvl7IMjBpctImd_P/view?usp=drivesdk" alt="صورة شخصية" class="profile-pic">
-
-    <div class="social-links">
-        <a href="https://www.facebook.com" class="facebook"><i class="fab fa-facebook"></i> فيسبوك</a>
-        <a href="https://www.twitter.com" class="twitter"><i class="fab fa-twitter"></i> تويتر</a>
-        <a href="https://www.instagram.com" class="instagram"><i class="fab fa-instagram"></i> إنستغرام</a>
-        <a href="https://www.linkedin.com" class="linkedin"><i class="fab fa-linkedin"></i> لينكدإن</a>
-    </div>
-
-    <!-- زر العودة إلى الأعلى -->
-    <button onclick="topFunction()" id="topBtn" title="Go to top">↑</button>
+    <h1>Open Camera and Read Domino Pieces</h1>
+    <video id="video" autoplay></video>
+    <canvas id="canvas"></canvas>
+    <button id="captureButton">Capture and Analyze</button>
 
     <script>
-        // إظهار زر العودة إلى الأعلى عند التمرير
-        window.onscroll = function() {scrollFunction()};
+        // Access the camera
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('captureButton');
+        const context = canvas.getContext('2d');
 
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("topBtn").style.display = "block";
-            } else {
-                document.getElementById("topBtn").style.display = "none";
-            }
-        }
+        // Request access to the camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error("Error accessing the camera: ", error);
+            });
 
-        // العودة إلى أعلى الصفحة
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+        // Capture and display the video frame on a canvas
+        captureButton.addEventListener('click', () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Analyze the image (you'll add the image analysis part here)
+            analyzeDominoPieces(canvas);
+        });
+
+        function analyzeDominoPieces(canvas) {
+            // Placeholder function for analyzing the domino pieces
+            // Here is where you would implement OpenCV.js or any other image processing library
+            console.log("Image captured. Now you can analyze the domino pieces.");
         }
     </script>
-
 </body>
 </html>
